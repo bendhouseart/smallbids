@@ -21,5 +21,11 @@ def test_make_getspec():
     collect_submodule = subprocess.run(f'cd {project_folder} && make getspec', shell=True,
     capture_output=True)
 
+    assert collect_submodule.returncode == 0
     assert bytes("Submodule path 'bids-specification': checked out", 'utf-8') in collect_submodule.stdout 
     assert bids_spec_path.is_dir()
+
+def test_make_mkdocs():
+    run_mkdocs = subprocess.run(f"cd {project_folder} && make mkdocs", shell=True, capture_output=True)
+    assert run_mkdocs.returncode == 0
+
